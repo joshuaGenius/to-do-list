@@ -1,0 +1,52 @@
+<div *ngIf="isLoading" class="spinner-container">
+  <mat-spinner diameter="30"></mat-spinner>
+</div>
+
+<div class="dashboard-container" *ngIf="!isLoading">
+  <div class="panel">
+    <h2 class="heading-text">Add To-Do List</h2>
+    <form [formGroup]="taskForm" (ngSubmit)="addTask()" class="task-form">
+      <mat-form-field appearance="outline">
+        <mat-label>Task Name</mat-label>
+        <input matInput placeholder="Enter the task name" formControlName="taskName" />
+        @if(taskForm.get('taskName')?.touched && taskForm.get('taskName')?.hasError('required')){
+        <mat-error>
+          Task name is required
+        </mat-error>
+        }
+        @if(taskForm.get('taskName')?.touched && taskForm.get('taskName')?.hasError('maxlength')){
+        <mat-error>Task name cannot be more than 15 characters.</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Task Description</mat-label>
+        <textarea matInput rows="4" placeholder="Enter task description" formControlName="taskDescription"></textarea>
+        @if(taskForm.get('taskDescription')?.touched && taskForm.get('taskDescription')?.hasError('required')){
+        <mat-error>Task description is required</mat-error>
+        }
+      </mat-form-field>
+      <div class="extra">
+        <mat-form-field appearance="outline">
+          <mat-label>Due Date</mat-label>
+          <input matInput [min]="minDate" [matDatepicker]="picker" formControlName="dueDate" />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          @if(taskForm.get('dueDate')?.touched && taskForm.get('dueDate')?.hasError('required')){
+          <mat-error>Due date is required</mat-error>
+          }
+          @if(taskForm.get('dueDate')?.touched && taskForm.get('dueDate')?.hasError('matDatepickerMin')){
+          <mat-error>Due date cannot be in the past.</mat-error>
+          }
+        </mat-form-field>
+        <div class="category">
+          <mat-radio-group aria-label="Select an option" formControlName="isWork">
+            <mat-radio-button [value]='true'>Work</mat-radio-button>
+            <mat-radio-button [value]='false'>Personal</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="taskForm.invalid">Add</button>
+    </form>
+  </div>
+</div>

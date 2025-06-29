@@ -1,0 +1,40 @@
+<div *ngIf="isLoading" class="spinner-overlay">
+  <mat-spinner diameter="50"></mat-spinner>
+</div>
+
+<div class="dashboard-container" *ngIf="!isLoading">
+    <div class="panel">
+        <h2 class="heading-text">{{ showDate ? 'Extend Date' : 'Delete The Task' }}</h2>
+        <form [formGroup]="editForm" class="task-form" (ngSubmit)="showDate ? update():delete()">
+            <div class="extra" *ngIf="this.showDate">
+                <mat-form-field appearance="outline">
+                    <mat-label>Due Date</mat-label>
+                    <input matInput [min]="minDate" [matDatepicker]="picker" formControlName="dueDate" />
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    @if(editForm.get('dueDate')?.touched && editForm.get('dueDate')?.hasError('required')){
+                    <mat-error>Due date is required</mat-error>
+                    }
+                    @if(editForm.get('dueDate')?.touched && editForm.get('dueDate')?.hasError('matDatepickerMin')){
+                    <mat-error>Due date cannot be in the past.</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+            <div class="confirmation">
+                Please type <strong>CONFIRM</strong>{{ showDate ? ' to update the due date.' : ' to Delete the Task' }}
+            </div>
+            <mat-form-field appearance="outline">
+                <input matInput formControlName="confirmation" />
+                @if(editForm.get('confirmation')?.touched && editForm.get('confirmation')?.hasError('required')){
+                <mat-error>
+                    Cannot Be Empty
+                </mat-error>
+                }
+            </mat-form-field>
+            <button mat-raised-button color="primary" type="submit"
+                [disabled]="(showDate && editForm.invalid) || editForm.get('confirmation')?.value !== 'CONFIRM'">
+                {{ showDate ? 'Update' : 'Delete' }}
+            </button>
+        </form>
+    </div>
+</div>

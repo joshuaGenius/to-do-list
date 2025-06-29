@@ -1,0 +1,112 @@
+<div *ngIf="isLoading" class="spinner-overlay">
+    <div class="spinner-container">
+        <mat-spinner diameter="50" strokeWidth="4"></mat-spinner>
+        <p class="loading-text">Loading, please wait...</p>
+    </div>
+</div>
+
+<div class="list" *ngIf="!isLoading">
+    <div class="list-header">
+        <p class="board">Task Board </p>
+        <button matTooltip="Adds Tasks" class="add-task" (click)="addTask()">+ Add Task</button>
+        <div class="category-buttons">
+            <button matTooltip="Filters the tasks by date" matButton="tonal" matTooltip="Sort by Date" class="dateSort"
+                (click)="toggleDateSort()">
+                <mat-icon>{{ sortIcon }}</mat-icon></button>
+            <button matTooltip="Filters the personal Tasks" mat-button (click)="filterCategory('isPersonal')"
+                [class.active]="selectedCategory === 'isPersonal'">Personal</button>
+            <button matTooltip="Filters the work Tasks" mat-button (click)="filterCategory('isWork')"
+                [class.active]="selectedCategory === 'isWork'">Work</button>
+
+        </div>
+    </div>
+
+    <div class="task-columns">
+        <div class="task-column">
+            <h4>In Progress</h4>
+            <ul>
+                <ng-container *ngFor="let task of tasks">
+                    <li *ngIf="!task.completed" (click)="onTaskClick(task.id)">
+                        <div class="task-list task-item-inprogress" [ngClass]="{ 'overdue': isOverdue(task) }">
+                            <div class="task-text">
+                                <div class="task-row">
+                                    <span class="task-name">{{ task.name }}</span>
+                                    <div style="display: flex;gap:10px;">
+                                        <span class="due-date" [ngStyle]="{ color: isOverdue(task) ? '#f44336' : ''}">
+                                            <mat-icon [ngStyle]="{ color: isOverdue(task) ? '#f44336' : '' }">{{
+                                                isOverdue(task) ? 'error' : 'access_time' }}</mat-icon>
+                                            <span class="status-text">{{ isOverdue(task) ? 'Timed Out' : 'In Progress'
+                                                }}</span>
+                                        </span>
+                                        <span class="due-date">{{ task.dueDate | date }}</span>
+                                    </div>
+                                </div>
+
+                                <div class="task-row">
+                                    <span class="task-desc">{{ task.description }}</span>
+                                    <span class="task-category">
+                                        {{ task.isWork ? '🏢 Work' : '' }}{{ task.isPersonal ? '🏠 Personal' : '' }}
+                                    </span>
+
+                                </div>
+                            </div>
+                            <ng-template [ngIf]="selectedTaskId === task.id">
+                                <div class="task-action">
+                                    @if(!isOverdue(task)){
+                                    <button matTooltip="Moves to completed" mat-button color="success"
+                                        (click)="markAsCompleted(task); $event.stopPropagation()">
+                                        <mat-icon>done</mat-icon> Mark as Completed
+                                    </button>
+                                    }@else{
+                                    <button matTooltip="Modifies the due date" mat-button color="success"
+                                        (click)="changeDue(task); $event.stopPropagation()">
+                                        <mat-icon>edit</mat-icon>Change due date
+                                    </button>
+                                    }
+                                    <button matTooltip="Deletes the Tasks" mat-button color="warn"
+                                        (click)="deleteTask(task); $event.stopPropagation()">
+                                        <mat-icon>delete</mat-icon> Delete
+                                    </button>
+                                </div>
+                            </ng-template>
+                        </div>
+                    </li>
+                </ng-container>
+            </ul>
+        </div>
+        <div class="task-column">
+            <h4>Completed
+            </h4>
+            <ul>
+                <ng-container *ngFor="let task of tasks">
+                    <li *ngIf="task.completed" (click)="onTaskClick(task.id)">
+                        <div class="task-list task-item-completed">
+                            <div class="task-text">
+                                <div class="task-row">
+                                    <span class="task-name">{{ task.name }}</span>
+                                    <span class="due-completed">
+                                        <mat-icon>check_circle</mat-icon><span class="status-text">Completed</span>
+                                    </span>
+                                </div>
+                                <div class="task-row">
+                                    <span class="task-desc">{{ task.description }}</span>
+                                    <span class="task-category">
+                                        {{ task.isWork ? '🏢 Work' : '' }}{{ task.isPersonal ? '🏠 Personal' : '' }}
+                                    </span>
+                                </div>
+                            </div>
+                            <ng-template [ngIf]="selectedTaskId === task.id">
+                                <div class="task-action">
+                                    <button matTooltip="Deletes the Tasks" mat-button color="warn"
+                                        (click)="deleteTask(task); $event.stopPropagation()">
+                                        <mat-icon>delete</mat-icon> Delete
+                                    </button>
+                                </div>
+                            </ng-template>
+                        </div>
+                    </li>
+                </ng-container>
+            </ul>
+        </div>
+    </div>
+</div>

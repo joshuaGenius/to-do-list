@@ -1,0 +1,126 @@
+.spinner-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+}
+
+
+.dashboard-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: #f9f9f9;
+  min-height: 250px;
+}
+
+.panel {
+  width: 100%;
+  max-width: 450px;
+  background: #fff;
+  padding: 30px 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.heading-text {
+  text-align: center;
+  font-weight: 800;
+  margin-bottom: 28px;
+  font-size: 28px;
+  color: #222;
+}
+
+.task-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.task-form button[type="submit"] {
+  padding: 14px 0;
+  background-color: #ff8a33;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.task-form button[type="submit"]:hover:not([disabled]) {
+  background-color: #e67628;
+}
+
+.task-form button[disabled] {
+  background-color: #d3d3d3;
+  color: #888;
+  cursor: not-allowed;
+}
+
+::ng-deep .mat-dialog-container {
+  padding: 24px;
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
+  max-width: 480px;
+  width: 100%;
+}
+
+.dialog-title {
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+.dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  gap: 12px;
+}
+
+.dialog-actions button {
+  font-weight: 600;
+}
+
+.confirmation{
+  font-size: 14px;
+  color: #d9534f; 
+  margin-bottom: 0px;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 768px) {
+ .panel {
+      padding: 15px 12px; 
+    }
+
+    .heading-text {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+
+    .task-form {
+      gap: 15px;
+    }
+
+    
+
+    .dialog-title {
+      font-size: 18px;
+    }
+}

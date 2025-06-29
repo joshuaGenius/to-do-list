@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+::ng-deep .mat-mdc-snack-bar-container.snackbar-success {
+  background-color: #4caf50 !important; /* Green */
+  color: white !important;
+  font-weight: bold;
+}
+
+::ng-deep .mat-mdc-snack-bar-container.snackbar-error {
+  background-color: #f44336 !important; /* Red */
+  color: white !important;
+  font-weight: bold;
+}
