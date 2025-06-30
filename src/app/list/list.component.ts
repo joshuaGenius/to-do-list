@@ -40,7 +40,7 @@ export class ListComponent implements OnDestroy {
         this.isLoading = false;
         const overdueTasks = this.tasks.some((task: any) => this.isOverdue(task));
          if (overdueTasks) {
-        this.snackBar.open('⚠️ Some tasks are overdue!', 'Dismiss', {
+        this.snackBar.open('⚠️ Reminder Some tasks are overdue!', 'Dismiss', {
           duration: 5000,
           horizontalPosition: 'center',
           verticalPosition: 'top',
