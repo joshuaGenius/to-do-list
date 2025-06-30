@@ -69,7 +69,7 @@ export class AddTaskComponent implements OnDestroy {
       next: (res) => {
         if (res) {
           this.taskForm.reset();
-          this.dialogRef.close();
+          this.dialogRef.close(true);
         }
       },
       error: (err) => {
