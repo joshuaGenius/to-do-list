@@ -4,7 +4,7 @@ The To-Do List Manager is a responsive and interactive task management web appli
 I have updated all the files except nodemodules as its size is big you can use npi to install nodemodules and all the relevant packages need for this project
 Firebase is connected with my configuratons so you can use it dont ned for a change and you can add datas to my database as i made it open source
 Then run the project using ng serve
-The list page appears
+The list page appears 
 The list page contains two sections one for inprogress tasks and otherone is for the completed one
 And the header has add task button and sorting options like date wise or workwise (It is the or option so you can sort only by datewise or category wise)
 Addlist you get a reactive form page of add task there you can  enter the details for the task (Note:Selecting todays date will me moved to timed out for testing purpose)
