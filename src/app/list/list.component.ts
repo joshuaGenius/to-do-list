@@ -46,6 +46,7 @@ export class ListComponent implements OnDestroy {
           verticalPosition: 'top',
           panelClass: ['snackbar-error']
         });
+         }
       }, error: (err) => {
         console.error(err)
         this.snackBar.open('Failed to fetch tasks.', 'Dismiss', {
