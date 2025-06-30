@@ -14,6 +14,8 @@ If the task is completed you can move the task to completed by clicking on the t
 timed out task can not be moved to completed you need to update its due date after updating the due date i can  be moved to completed
 there is no edit option for completed task but you can  delete completed task
 You will get notified if the task is moved to time out
+Every time you update date or delete you may need to confirm for the deletion
+As real time the tasks cannot be altered only its dates can be altred and it can be deleted
 have impleted angular snakbatrs for good user interface
 You can see as many tasks you want by scrolling
 Used rxjs ,services, observables,promises,and routes, erorr handling 
