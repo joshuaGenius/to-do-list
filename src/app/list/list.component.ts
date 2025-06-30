@@ -151,7 +151,7 @@ export class ListComponent implements OnDestroy {
     this.taskService.taskUpdation(task.id, { completed: !task.currentStatus }).then((res: any) => {
       if (res) {
         if (res) {
-          this.snackBar.open('Task moved to successfully!', 'Close', {
+          this.snackBar.open('Task moved to completed successfully!', 'Close', {
             duration: 3000,
             panelClass: ['snackbar-success']
           })
