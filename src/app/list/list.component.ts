@@ -57,8 +57,6 @@ export class ListComponent implements OnDestroy {
         if (res) {
           this.snackBar.open('Task added successfully!', 'Close', {
             duration: 3000,
-            horizontalPosition: 'right',
-            verticalPosition: 'top',
             panelClass: ['snackbar-success']
           })
         }
@@ -84,8 +82,6 @@ export class ListComponent implements OnDestroy {
         if (res) {
           this.snackBar.open('Task deleted Successfully!', 'Close', {
             duration: 3000,
-            horizontalPosition: 'right',
-            verticalPosition: 'top',
             panelClass: ['snackbar-success']
           })
         }
@@ -111,8 +107,6 @@ export class ListComponent implements OnDestroy {
         if (res) {
           this.snackBar.open(' Due date updated successfully!', 'Close', {
             duration: 3000,
-            horizontalPosition: 'right',
-            verticalPosition: 'top',
             panelClass: ['snackbar-success']
           })
         }
