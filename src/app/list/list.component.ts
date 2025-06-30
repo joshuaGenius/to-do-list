@@ -38,6 +38,14 @@ export class ListComponent implements OnDestroy {
       next: (res) => {
         this.tasks = res;
         this.isLoading = false;
+        const overdueTasks = this.tasks.some((task: any) => this.isOverdue(task));
+         if (overdueTasks) {
+        this.snackBar.open('⚠️ Some tasks are overdue!', 'Dismiss', {
+          duration: 5000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+          panelClass: ['snackbar-error']
+        });
       }, error: (err) => {
         console.error(err)
         this.snackBar.open('Failed to fetch tasks.', 'Dismiss', {
