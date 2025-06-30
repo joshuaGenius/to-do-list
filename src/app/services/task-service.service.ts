@@ -41,15 +41,12 @@ export class TaskServiceService {
 
   fetchTasksWithCategoryAndDate(category: string, order: any) {
     let conditions = [];
-
     if (category) {
       conditions.push(where(category, '==', true));
     }
-
     if (order) {
       conditions.push(orderBy('dueDate', order));
     }
-
     const q = query(this.tasksCollectionRef, ...conditions);
     return collectionData(q, { idField: 'id' }).pipe(
       map(docs => docs.map(doc => ({

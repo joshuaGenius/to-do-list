@@ -357,7 +357,6 @@
   .board {
     padding-top: 8px;
     font-size: 25px;
-    margin-left: 10px;
     color: black;
 
   }
@@ -365,12 +364,10 @@
   .add-task {
     font-size: 15px;
     padding: 8px 20px;
-    margin-right: 10px;
   }
 
   .category-buttons {
     flex-wrap: wrap;
-    justify-content: center;
   }
 
   .category-buttons button {
