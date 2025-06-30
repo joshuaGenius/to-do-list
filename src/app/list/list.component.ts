@@ -25,7 +25,7 @@ export class ListComponent implements OnDestroy {
   tasks: any;
   sortOrder: 'asc' | 'desc' = 'asc';
   sortIcon: string = 'arrow_upward';
-  selectedCategory!: string;
+  selectedCategory: any = null;
   selectedTaskId: string | null = null;
   currentDate: Date = new Date();
   private subscriptions: Subscription = new Subscription();
@@ -38,15 +38,6 @@ export class ListComponent implements OnDestroy {
       next: (res) => {
         this.tasks = res;
         this.isLoading = false;
-        const overdueTasks = this.tasks.some((task: any) => this.isOverdue(task));
-         if (overdueTasks) {
-        this.snackBar.open('⚠️ Reminder Some tasks are overdue!', 'Dismiss', {
-          duration: 5000,
-          horizontalPosition: 'center',
-          verticalPosition: 'top',
-          panelClass: ['snackbar-error']
-        });
-         }
       }, error: (err) => {
         console.error(err)
         this.snackBar.open('Failed to fetch tasks.', 'Dismiss', {
@@ -136,16 +127,20 @@ export class ListComponent implements OnDestroy {
   toggleDateSort() {
     this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
     this.sortIcon = this.sortOrder === 'asc' ? 'arrow_upward' : 'arrow_downward';
-    this.taskService.fetchTasksWithDate(this.sortOrder).subscribe((res) => {
-      this.tasks = res;
-    })
+    this.updateTasks();
   }
 
-  filterCategory(category?: any) {
+  filterCategory(category: string) {
     this.selectedCategory = this.selectedCategory === category ? null : category;
-    this.taskService.fetchTasksCategory(this.selectedCategory).subscribe((res) => {
-      this.tasks = res;
-    })
+    this.updateTasks();
+  }
+
+  updateTasks() {
+    this.subscriptions.add(this.taskService.fetchTasksWithCategoryAndDate(this.selectedCategory, this.sortOrder)
+      .subscribe(res => {
+        this.tasks = res;
+      })
+    )
   }
 
   onTaskClick(taskId: string) {
@@ -153,7 +148,19 @@ export class ListComponent implements OnDestroy {
   }
 
   markAsCompleted(task: any) {
-    this.taskService.taskUpdation(task.id, { completed: !task.currentStatus })
+    this.taskService.taskUpdation(task.id, { completed: !task.currentStatus }).then((res: any) => {
+      if (res) {
+        if (res) {
+          this.snackBar.open('Task moved to successfully!', 'Close', {
+            duration: 3000,
+            panelClass: ['snackbar-success']
+          })
+        }
+      }
+    })
+      .catch((error: any) => {
+        console.error(error);
+      })
   }
 
   ngOnDestroy(): void {

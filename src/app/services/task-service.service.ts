@@ -21,7 +21,6 @@ export interface Task {
 export class TaskServiceService {
 
   private tasksCollectionRef: CollectionReference<DocumentData>;
-
   constructor(private fireStore: Firestore) {
     this.tasksCollectionRef = collection(this.fireStore, 'tasks');
   }
@@ -40,28 +39,25 @@ export class TaskServiceService {
   }
 
 
-  fetchTasksWithDate(order: any) {
-    const q = query(this.tasksCollectionRef, orderBy('dueDate', order));
-    return collectionData(q, { idField: 'id' }).pipe(
-      map(docs => docs.map(doc => ({
-        ...doc,
-        dueDate: (doc['dueDate'] instanceof Timestamp) ? (doc['dueDate'] as Timestamp).toDate() : (doc['dueDate'] || null)
-      }) as Task))
-    );
-  }
-
-  fetchTasksCategory(category: string) {
+  fetchTasksWithCategoryAndDate(category: string, order: any) {
     let conditions = [];
+
     if (category) {
       conditions.push(where(category, '==', true));
     }
+
+    if (order) {
+      conditions.push(orderBy('dueDate', order));
+    }
+
     const q = query(this.tasksCollectionRef, ...conditions);
     return collectionData(q, { idField: 'id' }).pipe(
       map(docs => docs.map(doc => ({
         ...doc,
-        dueDate: (doc['dueDate'] instanceof Timestamp) ? (doc['dueDate'] as Timestamp).toDate() : (doc['dueDate'] || null)
-      }) as Task)
-      )
+        dueDate: (doc['dueDate'] instanceof Timestamp)
+          ? (doc['dueDate'] as Timestamp).toDate()
+          : (doc['dueDate'] || null)
+      }) as Task))
     );
   }
 
