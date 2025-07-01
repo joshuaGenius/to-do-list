@@ -49,20 +49,27 @@
   }
 }
 
+.container {
+  background-image: url('../../../public/assets/premium2.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 40px 0;
+}
 
 .list {
+  background-color: #EADDCA;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  background: rgba(255, 255, 255, 0.95);
-  margin: 25px auto 0px auto;
+  // margin: 25px auto 0px auto;
+  margin: 0 auto;
+  padding: 24px;
   width: 90%;
   max-width: 1200px;
-  height: 600px;
+  min-height: 600px;
   border-radius: 12px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-  padding: 24px;
-
 }
 
 .list-header {
@@ -78,38 +85,40 @@
   color: black;
 }
 
-
-.board {
-  padding-top: 15px;
-  font-size: 32px;
-  font-weight: 700;
-  color: #2c3e50;
+.user-greet {
   font-family: 'Segoe UI', Roboto, sans-serif;
+  justify-content: start;
+  font-size: 18px;
+  color: #6E260E;
+  font-weight: 600;
+  padding-top: 15px;
+  font-size: 28px;
 }
 
-.dateSort {
-  border-radius: 50%;
-}
-
-.dateSort mat-icon {
-  color: #00796b;
-  font-size: 24px;
+.header {
+  display: flex;
+  flex-direction: column;
 }
 
 
 .add-task {
-  background-color: #007bff;
+  background-color: #C19A6B;
   color: white;
   padding: 10px 20px;
   border-radius: 10px;
   font-size: 14px;
   font-weight: 600;
-  margin-left: 50px;
+  margin-left: 0px;
   border: none;
+  width: auto;
 }
 
+
+
+
+
 .add-task:hover {
-  background-color: rgb(95, 95, 235);
+  background-color: #80461B;
 }
 
 .task-columns {
@@ -164,6 +173,8 @@
   border-radius: 5px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+
 
 .task-list:hover {
   transform: translateY(-4px);
@@ -222,10 +233,6 @@
   border-radius: 3px;
 }
 
-.task-list {
-  position: relative;
-  padding-right: 40px;
-}
 
 .edit {
   color: #1976d2;
@@ -297,8 +304,8 @@
 }
 
 .category-buttons button {
-  background-color: #f0f0f0;
-  color: #333;
+  background-color: #C19A6B;
+  color: white;
   border: none;
   border-radius: 8px;
   padding: 5px 12px;
@@ -307,12 +314,12 @@
 }
 
 .category-buttons button:hover {
-  background-color: #dcdcdc;
+  background-color: #80461B;
   transform: translateY(-2px);
 }
 
 .category-buttons button.active {
-  background-color: #007bff;
+  background-color: #80461B;
   color: white;
 }
 
@@ -335,43 +342,65 @@
 }
 
 .snackbar-success {
- background-color: #4caf50 !important;
-  color: #ffffff 
+  background-color: #4caf50 !important;
+  color: #ffffff
 }
 
 .snackbar-error {
- background-color: #f44336 !important; 
+  background-color: #f44336 !important;
   color: #ffffff !important;
 }
 
 @media screen and (max-width:768px) {
+  .container {
+    padding: 0;
+    margin: 0;
+  }
+
+  .task-column {
+    box-shadow: none;
+    border-top: none;
+    box-sizing: content-box;
+    padding: 10px;
+    min-width: 250px;
+  }
+
+  .list {
+    justify-content: center;
+    margin: 0;
+    width: 90%;
+  }
+
+  .due-date {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 400;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   .status-text {
     display: none;
   }
 
   .list-header {
+    justify-content: center;
     gap: 14px;
-    align-items: center;
   }
 
-  .board {
+  .user-greet {
     padding-top: 8px;
-    font-size: 25px;
-    color: black;
+    font-size: 18px;
 
   }
 
   .add-task {
-    font-size: 15px;
+    font-size: 12px;
     padding: 8px 20px;
   }
 
-  .category-buttons {
-    flex-wrap: wrap;
-  }
 
-  .category-buttons button {
-    font-size: 12px;
-    padding: 1px 5px;
-  }
+
 }

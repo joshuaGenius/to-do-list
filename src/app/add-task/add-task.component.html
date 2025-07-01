@@ -15,7 +15,7 @@
         </mat-error>
         }
         @if(taskForm.get('taskName')?.touched && taskForm.get('taskName')?.hasError('maxlength')){
-        <mat-error>Task name cannot be more than 15 characters.</mat-error>
+        <mat-error>Task name cannot be more than 20 characters.</mat-error>
         }
       </mat-form-field>
       <mat-form-field appearance="outline">
@@ -23,6 +23,9 @@
         <textarea matInput rows="4" placeholder="Enter task description" formControlName="taskDescription"></textarea>
         @if(taskForm.get('taskDescription')?.touched && taskForm.get('taskDescription')?.hasError('required')){
         <mat-error>Task description is required</mat-error>
+        }
+         @if(taskForm.get('taskDescription')?.touched && taskForm.get('taskDescription')?.hasError('maxlength')){
+        <mat-error>Task description cannot be more than 60 characters.</mat-error>
         }
       </mat-form-field>
       <div class="extra">

@@ -1,0 +1,67 @@
+.fullscreen-background {
+  background-image: url('../../../public/assets/premium_photo.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 730px;       
+  width: 100%;
+  display: flex;
+  justify-content:center;
+  align-items: center;      
+}
+
+.signin-container {
+  display: flex;
+  justify-content:end;
+    width: 100%;
+  max-width: 600px;
+}
+
+mat-card {
+  width: 400px;
+  padding: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  background: #fff3e0;
+}
+
+.card-title {
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  color: #ef6c00;
+  margin-bottom: 20px;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.snackbar-success {
+  background-color: #4caf50 !important;
+  color: #ffffff;
+}
+
+.snackbar-error {
+  background-color: #f44336 !important;
+  color: #ffffff !important;
+}
+
+
+
+@media (max-width: 768px) {
+   .fullscreen-background {
+    justify-content: center;
+  }
+
+  .signin-container {
+    justify-content: center;
+    max-width: 100%;
+  }
+
+  mat-card {
+    width: 100%;
+    max-width: 70%;
+  }
+}

@@ -47,8 +47,8 @@ export class AddTaskComponent implements OnDestroy {
 
   ngOnInit() {
     this.taskForm = this.fb.group({
-      taskName: ['', Validators.required, '', Validators.maxLength(15)],
-      taskDescription: ['', Validators.required],
+      taskName: ['', [Validators.required, Validators.maxLength(20)]],
+      taskDescription: ['',[Validators.required, Validators.maxLength(60)]],
       dueDate: ['', Validators.required],
       isWork: [true]
     });

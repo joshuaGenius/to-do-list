@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { AddTaskComponent } from '../add-task/add-task.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
@@ -10,6 +11,7 @@ import { ConfirmationComponent } from '../confirmation/confirmation.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { AuthService } from '../services/auth.service';
 
 
 @Component({
@@ -22,6 +24,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 export class ListComponent implements OnDestroy {
 
   isLoading = true;
+  username: string = 'User';
   tasks: any;
   sortOrder: 'asc' | 'desc' = 'asc';
   sortIcon: string = 'arrow_upward';
@@ -30,7 +33,10 @@ export class ListComponent implements OnDestroy {
   currentDate: Date = new Date();
   private subscriptions: Subscription = new Subscription();
 
-  constructor(private dialog: MatDialog, private taskService: TaskServiceService, private snackBar: MatSnackBar) { }
+  constructor(private router: Router, private dialog: MatDialog, private taskService: TaskServiceService, private snackBar: MatSnackBar, private authService: AuthService) {
+    const nav = this.router.getCurrentNavigation();
+    this.username = nav?.extras?.state?.['username'] ?? 'User';
+  }
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -161,6 +167,15 @@ export class ListComponent implements OnDestroy {
       .catch((error: any) => {
         console.error(error);
       })
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.snackBar.open(' Logout successfull!', 'Close', {
+      duration: 3000,
+      panelClass: ['snackbar-success']
+    })
+    this.router.navigate(['/']);
   }
 
   ngOnDestroy(): void {
