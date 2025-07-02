@@ -25,10 +25,11 @@
             Password must be at least 6 characters
           </mat-error>
         </mat-form-field>
-
-        <button mat-raised-button color="primary" type="submit" [disabled]="signinForm.invalid">
-          Sign In
-        </button>
+<div class="signinButton">
+    <button mat-raised-button color="primary" type="submit" [disabled]="signinForm.invalid">
+      Sign In
+    </button>
+</div>
       </form>
     </mat-card>
   </div>

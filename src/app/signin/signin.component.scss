@@ -48,7 +48,10 @@ mat-card {
   color: #ffffff !important;
 }
 
-
+.signinButton{
+    display: flex;
+    justify-content: center;
+}
 
 @media (max-width: 768px) {
    .fullscreen-background {
